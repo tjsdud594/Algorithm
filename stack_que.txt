@@ -1,0 +1,115 @@
+**1주차 스택과 큐**
+
+<PART01. STACK>
+- 스택이란?
+    프로그래밍에서 목록 혹은 리스트에서 접근이 한 쪽에서만 가능한 구조
+    LIFO(Last-In, First_Out)가 기본원리
+
+    대표적인 함수 : push() - list안에 데이터 추가(가장 마지막에)
+                   peek() - 가장마지막에 들어간 데이터를 확인
+                   pop() - 가장 마지막에 들어간 데이터를 추출
+
+
+- python의 스택 구현 방법
+    1. 직접구현
+        class Stack(list):
+            push = list.append
+            #list 가장 마지막에 데이터 추가
+
+            def peek(self):
+                return self[-1]
+                # 가장 마지막 데이터 확인
+                # return self[len(slef)-1] 도 가능!
+
+            # pop()은 python 내장함수로 이미 존재
+
+        s = Stack()
+        s.push(1)
+        s.push(5)
+        s.push(10)
+        print('my stack is: ', s)  #[1, 5, 10]
+        print('popped value is: ', s.pop())  #10
+        print('my stack is: ', s)   #[1, 5]
+        print('peeked value is: ', s.peek)   #5
+        print('my stack is: ', s)   #[1, 5]
+
+    2. 이미 구현된 클래스 import
+        > Python은 list가 스택으로 사용 가능하도록 구현 됨.
+
+    3. list를 스택으로 구현
+        > Python은 list가 스택으로 사용 가능하도록 구현 됨.
+            s = []
+            s.append(1)
+            s.append(5)
+            s.append(1)
+            print('my stack is: ', s)  #[1, 5, 10]
+            print('popped value is: ', s.pop())  #10
+            print('my stack is: ', s)   #[1, 5]
+            print('peeked value is: ', s[-1])    #5
+            print('my stack is: ', s)   #[1, 5]
+
+- 스택의 활용
+    1. 이전페이지 / 다음페이지
+    2. 깊이 우선 탐색(DFS)
+
+
+<PART02. QUEUE>
+- 큐 란?
+    프로그래밍 목록 혹은 리스트에서 접근이 양쪽에서 가능한 구조
+    FIFO(First-In, First-Out)가 기본원리
+
+    대표적인 함수 : put() - list의 마지막에 데이터 추가
+                   peek() - list의 가장 첫번째 데이터 확인 가능
+                   get() - list의 가장 첫번째 데이터 추출
+
+- python의 큐 구현방법
+    1. 직접구현
+    class Queue(list):
+        put = list.append
+
+        def peek(self):
+            return self[0]
+
+        def get(self):
+            return self.pop(0)
+
+    q = Queue()
+    q.put(1)
+    q.put(5)
+    q.put(10)
+
+    print('my queue is: ', q)  #[1, 5, 10]
+    print('get value is: ', q.get())  #1
+    print('my queue is: ', q)   #[5, 10]
+    print('peeked value is: ', q.peek())   #5
+    print('my queue is: ', q)   #[5, 10]
+
+    2. 이미 구현된 클래스 import
+    from queue import Queue
+
+    q = Queue()
+    q.put(1)
+    q.put(5)
+    q.put(10)    
+
+    print('my queue is: ', q)  #[1, 5, 10]
+    print('get value is: ', q.get())  #1
+    print('my queue is: ', q)   #[5, 10]
+    print('peeked value is: ', q.peek())   #5
+    print('my queue is: ', q)   #[5, 10]
+
+    3. list를 큐로 구현
+            q = []
+            q.append(1)
+            q.append(5)
+            q.append(1)
+            print('my queue is: ', q)  #[1, 5, 10]
+            print('get value is: ', q.pop(0))  #1
+            print('my queue is: ', q)   #[5, 10]
+            print('peeked value is: ', q[0])    #5
+            print('my queue is: ', q)   #[5, 10]
+
+- 큐의 활용
+    1. 프린터 인쇄 대기열
+    2. 너비 우선 탐색(BFS)
+
