@@ -3,7 +3,7 @@
 
 ## &#128187;Algorithm Code를 공부한 흔적들입니다!
 
-#### 1주차. Stack / Queue
+### 1주차. Stack / Queue
 <details>
 <summary>&#128200;주식가격</summary>
  &nbsp; &nbsp; > 해결&#128515;
