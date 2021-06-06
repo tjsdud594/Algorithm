@@ -5,9 +5,8 @@
 
 #### 1주차. Stack / Queue
 <details>
-> <summary>&#128200;주식가격</summary>
-     해결&#128515;
-<br>
+<summary>&#128200;주식가격</summary>
+ &nbsp; &nbsp; > 해결&#128515;
 
     def solution(prices):
     answer = [0] * len(prices)
