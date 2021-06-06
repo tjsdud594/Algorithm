@@ -6,7 +6,20 @@
 #### 1주차. Stack / Queue
 <details>
 > <summary>&#128200;주식가격</summary>
-    해결&#128515;
+     해결&#128515;
+<br>
+
+    def solution(prices):
+    answer = [0] * len(prices)
+    
+    for i in range(len(prices)):
+        for j in range(i+1, len(prices)):                          
+            if prices[i] > prices[j]:  
+                answer[i] += 1  
+                break
+            else:
+                answer[i] += 1
+    return answer
    </details>
 
 <details>
