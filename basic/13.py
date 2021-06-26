@@ -32,13 +32,13 @@ def solution(n):
     return answer
 
 
-# solution 2
+# solution 2 (재귀함수)
 def solution(n):
     if n < 10:
         return n
     return (n % 10) + solution(n // 10)
 
-    
+
 print(solution(n))
 
 
