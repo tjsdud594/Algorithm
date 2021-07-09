@@ -41,7 +41,7 @@
             s = []
             s.append(1)
             s.append(5)
-            s.append(1)
+            s.append(10)
             print('my stack is: ', s)  #[1, 5, 10]
             print('popped value is: ', s.pop())  #10
             print('my stack is: ', s)   #[1, 5]

@@ -1,4 +1,5 @@
 <!--이모지 : https://steemit.com/steemkr-guide/@snow-airline/steemkr-quick-start-guide-->
+<!--이모지 넣는 방법 윈도우키+마침표-->
 
 
 ## &#128187;Algorithm Code를 공부한 흔적들입니다!

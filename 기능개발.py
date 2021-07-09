@@ -19,7 +19,7 @@ progresses	                speeds   	        return
 
 progresses = [95, 90, 99, 99, 80, 99]
 speeds = [1, 1, 1, 1, 1, 1]
-
+day = [5, 10, 1, 1, 20, 1]
 
 def solution(progresses, speeds):
     day = []
@@ -36,15 +36,19 @@ def solution(progresses, speeds):
         if p >= 100:
             day.append(a)
 
-    for a in range(len(day)):
-        for b in range(1, len(day)):
-            if day[a] >= day[b]:
-                c += 1
-                answer.append(c)
-                break
+    while len(day) > 0:
+        ans = 0
+        j = day.pop(0)
+        j1 = day.copy()
+        for i in range(len(day)):
+            if j >= day[i]:
+                ans += 1
+                j1.pop(0)
             else:
-                c += 1
-            
+                ans += 1
+                answer.append(ans)
+                break
+
 
     return answer
 
