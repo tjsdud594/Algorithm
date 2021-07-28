@@ -14,12 +14,19 @@ phone_number	return
 '''
 
 def solution(phone_number):
-    for i in range(len(phone_number)-4):
-        print(phone_number[i])
-        phone_number[i]
-    print(phone_number)
+    answer = []
+    for i in range(len(phone_number)):
+        if i < len(phone_number)-4:
+            answer.append('*')
+        if i >= len(phone_number)-4:
+            answer.append(phone_number[i])
+    return ''.join(answer)
+
+    
+def solution2(phone_number):
+
+    return "*"*(len(phone_number)-4) + phone_number[-4:]
 
 
 
-
-print(solution("01033334444"))
+print(solution2("01033334444"))
