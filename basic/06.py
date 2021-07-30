@@ -11,7 +11,7 @@ def solution(arr):
     return answer
 
 # solution2
-def solution(arr):
+def solution2(arr):
     answer = []
     for i in arr:
         if answer[-1:] == [i]:
@@ -19,3 +19,6 @@ def solution(arr):
         answer.append(i)
 
     return answer
+
+
+print(solution(arr))

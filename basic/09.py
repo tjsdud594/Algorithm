@@ -22,9 +22,10 @@ n과 m은 각각 1000 이하인 자연수입니다.
 
 
 # solution 1
-a, b = map(int, input().strip().split(' '))
-for i in range(1, b+1):
-    print(a*"*")
+def solution():
+    a, b = map(int, input().strip().split(' '))
+    for i in range(1, b+1):
+        print(a*"*")
 
 # solution 2
 a, b = map(int, input().strip().split(' '))
@@ -32,4 +33,4 @@ answer = ('*'*a +'\n')*b
 print(answer)
 
 
-
+print(solution())
