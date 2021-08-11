@@ -4,6 +4,10 @@
 
 ## &#128187;Algorithm Code를 공부한 흔적들입니다!
 
+## basic
+> 기초적인 알고리즘문제!!!
+
+
 ### 1주차. Stack / Queue
 <details>
 <summary>&#128200;주식가격</summary>
