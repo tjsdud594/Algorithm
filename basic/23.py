@@ -47,6 +47,4 @@ def solution(answer):
 
     print(A)
 
-
-
 print(solution(answer))
