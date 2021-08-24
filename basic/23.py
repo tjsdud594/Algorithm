@@ -33,20 +33,35 @@ answers	    return
 
 모든 사람이 2문제씩을 맞췄습니다.
 '''
-
+from itertools import chain, repeat
+import operator
 
 answer = [1,2,3,4,5]
 
-def solution(answer):
+def solution(answers):
     A = [1,2,3,4,5]
     B = [2, 1, 2, 3, 2, 4, 2, 5]
     C = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
-    A.repeat()
-    B.repeat()
-    C.repeat()
 
-    print(A)
+    A_answer = list(chain.from_iterable(repeat(A,int(10000/len(A)))))
+    B_answer = list(chain.from_iterable(repeat(B,int(10000/len(B)))))
+    C_answer = list(chain.from_iterable(repeat(C,int(10000/len(C)))))
 
-    
+    a=0
+    b=0
+    c=0
+
+    for ques in range(len(answers)):
+        if A_answer[ques] == answers[ques]:
+            a+=1
+        if B_answer[ques] == answers[ques]:
+            b+=1
+        if C_answer[ques] == answers[ques]:
+            c+=1
+
+    answer = [a,b,c]
+
+    ans_list =  list(filter(lambda x: answer[x] == max(answer), range(len(answer))))
+    return list(map(operator.add, ans_list, [1,1,1]))
 
 print(solution(answer))
