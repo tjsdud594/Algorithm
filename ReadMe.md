@@ -6,7 +6,7 @@
 
 ## basic
 > 기초적인 알고리즘문제!!!
-> 
+> 출처 : Programmers
 <br>
 
 ## test
