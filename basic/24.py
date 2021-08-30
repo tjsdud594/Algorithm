@@ -57,6 +57,7 @@ participant	                                        completion	                 
 participant = ["mislav", "stanko", "mislav", "ana"]
 completion = ["stanko", "ana", "mislav"]	
 
+# 테스트는 통과 효율성X
 def solution(participant, completion):
     participant.sort()
     completion.sort()
@@ -64,7 +65,6 @@ def solution(participant, completion):
         for part in participant:
             if part != com:
                 participant.pop(participant.index(com))
-
                 break
 
         for name in participant:
