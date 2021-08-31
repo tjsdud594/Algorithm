@@ -53,3 +53,22 @@ participant	                                        completion	                 
 예제 #3
 "mislav"는 참여자 명단에는 두 명이 있지만, 완주자 명단에는 한 명밖에 없기 때문에 한명은 완주하지 못했습니다.
 '''
+
+participant = ["mislav", "stanko", "mislav", "ana"]
+completion = ["stanko", "ana", "mislav"]	
+
+def solution(participant, completion):
+    participant.sort()
+    completion.sort()
+    for com in completion:
+        for part in participant:
+            if part != com:
+                participant.pop(participant.index(com))
+
+                break
+
+        for name in participant:
+            return name     
+
+print(solution(participant, completion))
+    
