@@ -64,6 +64,7 @@ def solution(participant, completion):
     for com in completion:
         for part in participant:
             if part != com:
+                # pop() : 리스트의 처음부터 훑기 때문에 효율성에서 문제
                 participant.pop(participant.index(com))
                 break
 
