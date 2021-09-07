@@ -10,7 +10,8 @@
 <br>
 
 ## test
-> playdata에서 실시한 코딩테스트 1회
+> playdata에서 실시한 코딩테스트 1회 문제 및 풀이
+> playdata에서 실시한 코딩테스트 2회 문제 및 풀이
 <br>
 
 ### 1주차. Stack / Queue
