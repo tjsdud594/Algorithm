@@ -5,7 +5,7 @@
 ## &#128187;Algorithm Code를 공부한 흔적들입니다!
 
 ## basic
-> 기초적인 알고리즘문제!!!
+> 기초적인 알고리즘문제!!! <br>
 > 출처 : Programmers
 <br>
 
