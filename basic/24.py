@@ -69,11 +69,13 @@ def solution(participant, completion):
         for part in participant:
             if part != com:
                 # pop() : 리스트의 처음부터 훑기 때문에 효율성에서 문제
-                participant.pop(participant.index(com))
+                # participant.pop(participant.index(com))
+                # del participant[participant.index(com)]
+
                 break
 
-        for name in participant:
-            return name     
+    for name in participant:
+        return name     
 
 print(solution(participant, completion))
     
