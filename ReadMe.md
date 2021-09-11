@@ -5,12 +5,12 @@
 ## &#128187;Algorithm Code를 공부한 흔적들입니다!
 
 ## basic
-> 기초적인 알고리즘문제!!!
+> 기초적인 알고리즘문제!!! <br>
 > 출처 : Programmers
 <br>
 
-## test
-> playdata에서 실시한 코딩테스트 1회 문제 및 풀이
+## 📝test
+> playdata에서 실시한 코딩테스트 1회 문제 및 풀이 <br>
 > playdata에서 실시한 코딩테스트 2회 문제 및 풀이
 <br>
 
