@@ -54,33 +54,25 @@ aa1+aa2	    AAAA12	    43690
 E=M*C^2	    e=m*c^2	    65536
 '''
 
+from curses.ascii import isalpha
 import math
-def sliceTwo(string):
-    lst = []
-    for i in range(len(string)):
-        word = string[i:i+2].strip()
-        if word.isalpha() and len(word)==2:
-            lst.append(word.lower())
-    return lst
+import re
 
 def solution(str1, str2):
-    str1_lst = sliceTwo(str1)
-    str2_lst = sliceTwo(str2)
+
+    str1list = [str1[i:i+2].lower() for i in range(len(str1)) if re.fullmatch(r'\w{2}', str1[i:i+2]) and str1[i:i+2].isalpha()]
+    str2list = [str2[i:i+2].lower() for i in range(len(str2)) if re.fullmatch(r'\w{2}', str2[i:i+2]) and str2[i:i+2].isalpha()]
     
-    if len(str1_lst)==0 and len(str2_lst)==0:
+    if len(str1list)==0 and len(str2list)==0:
         return 65536
     
-    same = set(str1_lst) & set(str2_lst) # 교집합
-    total = set(str1_lst) | set(str2_lst) # 합집합
-    print(same, total)
+    same = set(str1list) & set(str2list) # 교집합
+    total = set(str1list) | set(str2list) # 합집합
     
     a = 0 # 분자
     b = 0 # 분모
     for i in total:
-        if i in same:
-            a+=min(str1_lst.count(i),str2_lst.count(i))
-            b+=max(str1_lst.count(i),str2_lst.count(i))
-        else:
-            b+=max(str1_lst.count(i),str2_lst.count(i))
-    print(a, b)
+        a+=min(str1list.count(i),str2list.count(i))
+        b+=max(str1list.count(i),str2list.count(i))
+
     return math.trunc(65536*(a/b))
