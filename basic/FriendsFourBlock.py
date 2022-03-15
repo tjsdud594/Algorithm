@@ -48,7 +48,6 @@ n = 5
 board = ["CCBDE", "AAADE", "AAABF", "CCBBF"]
 
 def solution(m, n, board):
-    answer = 0
     check = [[0]*n for _ in range(m)]
     board = [list(i) for i in board]
 
@@ -61,7 +60,7 @@ def solution(m, n, board):
                     check[i][j], check[i+1][j], check[i][j+1], check[i+1][j+1] = 1,1,1,1
                     cnt+=1
         print("board는 그대로 : ", board)
-        print("check만 표시 : ",check)
+        print("check만 표시 : ",check, "\n")
         if cnt==0:
             break
         # check에 1로 표시된 블록을 1로 표시해서 삭제하기
@@ -71,7 +70,7 @@ def solution(m, n, board):
                     board[i][j] = 1
 
         print("board도 표시 : ", board)
-        print("check만 표시 : ",check)
+        print("check만 표시 : ",check, "\n")
         # 삭제 후 위의 블럭들 아래로 내림
         for i in range(m-1, -1, -1):
             for j in range(n):
@@ -87,9 +86,10 @@ def solution(m, n, board):
                             board[x][j] = 1
                             check[i][j] = 0
                             check[x][j] = 1
+                            break
 
         print(board)
-        print(check)
+        print(check, "\n")
     return sum([i.count(1) for i in board])
     
 print(solution(m, n, board))
