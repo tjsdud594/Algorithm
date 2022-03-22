@@ -53,5 +53,17 @@ def solution(k, dungeons):
     return answer
 
 
-    # 순열조합을 이용한 풀이
-    
+# 순열조합을 이용한 풀이
+from itertools import permutations
+def solution2(k, dungeons):
+    lst = permutations(dungeons,len(dungeons))
+    answer = 0
+    for l in lst:
+        cnt = 0
+        fatigue = k
+        for enter, cost in l:
+            if fatigue>=enter:
+                fatigue-=cost
+                cnt+=1
+        answer = max(answer, cnt)
+    return answer
