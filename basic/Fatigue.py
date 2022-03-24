@@ -56,6 +56,7 @@ def solution(k, dungeons):
 # 순열조합을 이용한 풀이
 from itertools import permutations
 def solution2(k, dungeons):
+    # 모든 순서조합을 구함
     lst = permutations(dungeons,len(dungeons))
     answer = 0
     for l in lst:
