@@ -40,3 +40,20 @@ board	                                    answer
 | 1 | 1 | 1 | 1 |
 로 가장 큰 정사각형의 넓이는 4가 되므로 4를 return합니다.
 '''
+# 효율성 통과 X
+def solution(board):
+    answer = 0
+    cnt = 0
+    for i in board:
+        cnt+=i.count(1)
+    cnt = int(cnt**0.5)
+    
+    while cnt>0:
+        for x in range(len(board)-cnt+1):
+            for y in range(len(board[0])-cnt+1):
+                new = [row[y:y+cnt] for row in board[x:x+cnt]]
+                zero_cnt = [i.count(0) for i in new]
+                if zero_cnt.count(0)==len(zero_cnt):
+                    return len(new)**2
+        cnt-=1
+    return 0
