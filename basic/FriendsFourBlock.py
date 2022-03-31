@@ -59,8 +59,8 @@ def solution(m, n, board):
                 if board[i][j]!=1 and board[i][j]==board[i][j+1]==board[i+1][j]==board[i+1][j+1]:
                     check[i][j], check[i+1][j], check[i][j+1], check[i+1][j+1] = 1,1,1,1
                     cnt+=1
-        print("board는 그대로 : ", board)
-        print("check만 표시 : ",check, "\n")
+        # print("board는 그대로 : ", board)
+        # print("check만 표시 : ",check, "\n")
         if cnt==0:
             break
         # check에 1로 표시된 블록을 1로 표시해서 삭제하기
@@ -69,8 +69,8 @@ def solution(m, n, board):
                 if check[i][j]==1:
                     board[i][j] = 1
 
-        print("board도 표시 : ", board)
-        print("check만 표시 : ",check, "\n")
+        # print("board도 표시 : ", board)
+        # print("check만 표시 : ",check, "\n")
         # 삭제 후 위의 블럭들 아래로 내림
         for i in range(m-1, -1, -1):
             for j in range(n):
@@ -88,8 +88,8 @@ def solution(m, n, board):
                             check[x][j] = 1
                             break
 
-        print(board)
-        print(check, "\n")
+        # print(board)
+        # print(check, "\n")
     return sum([i.count(1) for i in board])
     
 print(solution(m, n, board))
