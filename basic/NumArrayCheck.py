@@ -28,3 +28,10 @@ def solution(arr):
     if lst==arr:
         return True
     return False
+
+# 시간초과
+def solution2(arr):
+    set_arr = set(arr)
+    if len(set_arr)==len(arr):
+        return True
+print(solution([4, 1, 3, 2]))
