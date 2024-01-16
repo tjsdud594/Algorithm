@@ -1,7 +1,7 @@
 ### 문제 : https://school.programmers.co.kr/learn/courses/30/lessons/42885
 
 ###############################
-#           푸는중            #
+#           풀이완료            #
 ###############################
 import time
 
