@@ -5,68 +5,46 @@
 ###############################
 
 
-def solution_t(number, k):
+def solution(number, k):
 
-    print(number, k)
-    answer = []
+    answer_list = []
 
-    for num in number:
-        if answer==[]:
-            answer.append(num)
-            continue
-        elif answer[-1]<num and k>0:
+    for i, n in enumerate(list(number)):
+        if answer_list==[]:
+            answer_list.append(n)
 
-            while answer[-1]<num and k>0:
-                answer.pop()
+        elif int(answer_list[-1])>=int(n):
+            answer_list.append(n)
+
+        elif int(answer_list[-1])<int(n) and k>0:
+            while int(answer_list[-1])<int(n) and k>0:
+                # print(f"제거 진입, k:{k}, answer_list : {answer_list}, n: {n}")
+                answer_list.pop()
                 k-=1
-
-                if k<=0 or answer==[]:
+                if answer_list==[] or int(answer_list[-1])>=int(n) or k==0:
+                    answer_list.append(n)
                     break
-            answer.append(num)
-            continue
-        else:
-            answer.append(num)
+
+        if k<=0:
+            # print(f"k없음, k : {k}, answer_list : {answer_list}, list_num:{list(number)[i+1:]}")
+            answer_list.extend(list(number)[i+1:])
+            break
 
     if k>0:
-        answer = answer[:-k]
+        answer_list = answer_list[:-k]
 
-    return ''.join(answer)
+    return ''.join(answer_list)
 
-
-# 이전 풀이
-def solution_bf(number, k):
-
-    ans = []
-    for num in number:
-        if k==0:
-            ans.append(num)
-        elif ans==[]:
-            ans.append(num)
-            continue
-        elif ans[-1]<num:
-            while ans[-1]<num:
-                
-                ans.pop()
-                k-=1
-                if k==0 or not ans:
-                    break
-            ans.append(num)
-        else:
-            ans.append(num)
-            continue
-    if k>0:
-        ans = ans[:-k]
-    return "".join(ans)
 
 
 if __name__ == "__main__":
     import time
-    number = "654321"
-    k=5
+    number = "4177252841"
+    k=4
 
     print("start")
     start = time.time()
-    print(solution_t(number, k))
+    print(solution(number, k))
     end = time.time()
 
     print(f"{end - start:.5f} sec")
