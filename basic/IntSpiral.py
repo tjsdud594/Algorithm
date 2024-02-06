@@ -45,6 +45,50 @@ def solution(n):
 
     return answer
 
+# 오답풀이
+def solution_re(n: int):
+    answer=[[0 for _ in range(n)] for __ in range(n)]
+
+    y, x = 0, 0
+    direction = 'right' # right, down, left, top
+    for i in range(1, n*n+1):
+
+        answer[y][x] = i
+
+        if direction=='right':
+            if x<n-1 and answer[y][x+1]==0:
+                x+=1
+            else:
+                y+=1
+                direction='down'
+            continue
+        
+        elif direction=='down':
+            if y<n-1 and answer[y+1][x]==0:
+                y+=1
+            else:
+                x-=1
+                direction='left'
+            continue
+
+        elif direction=='left':
+            if x>=0 and answer[y][x-1]==0:
+                x-=1
+            else:
+                y-=1
+                direction='top'
+            continue
+
+        elif direction=='top':
+            if y>=0 and answer[y-1][x]==0:
+                y-=1
+            else:
+                x+=1
+                direction='right'
+            continue
+
+    return answer
+
 
 if __name__ == "__main__":
     import time
@@ -52,7 +96,7 @@ if __name__ == "__main__":
 
     print("start")
     start = time.time()
-    print(solution(n))
+    print(solution_re(n))
     end = time.time()
 
     print(f"{end - start:.5f} sec")
