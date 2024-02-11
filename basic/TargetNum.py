@@ -6,43 +6,34 @@
 
 ## BFS : 최선의 경우를 구할때 주로 사용한다!
 def solution_bfs(numbers, target):
-
     super_node = [0]
-
-    for num in numbers:
+    
+    for n in numbers:
         temp = []
-
-        for node in super_node:
-            temp.append(node+num)
-            temp.append(node-num)
-
+        for s in super_node:
+            temp.append(s+n)
+            temp.append(s-n)
         super_node=temp
 
     return super_node.count(target)
 
 ## DFS : 주로 재귀함수로 구현한다!
 def dfs(numbers, target, idx, values):
-    # print(values)
-
-    global cnt 
-    # cnt = 0
-
-
+    global cnt
+    
     if idx!=len(numbers):
-        dfs(numbers, target, idx+1, values + numbers[idx])
-        dfs(numbers, target, idx+1, values - numbers[idx])
-
+        dfs(numbers, target, idx+1, values+numbers[idx])
+        dfs(numbers, target, idx+1, values-numbers[idx])
+        
     else:
         if values==target:
             cnt+=1
-        return
 
 def solution_dfs(numbers, target):
-
     global cnt
     cnt=0
+    
     dfs(numbers, target, 0, 0)
-
 
     return cnt
 
