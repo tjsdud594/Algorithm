@@ -4,7 +4,7 @@
 #           풀이 완료          #
 ###############################
 
-## BFS
+## BFS : 최선의 경우를 구할때 주로 사용한다!
 def solution_bfs(numbers, target):
 
     super_node = [0]
@@ -19,7 +19,6 @@ def solution_bfs(numbers, target):
         super_node=temp
 
     return super_node.count(target)
-
 
 ## DFS : 주로 재귀함수로 구현한다!
 def dfs(numbers, target, idx, values):
@@ -38,7 +37,6 @@ def dfs(numbers, target, idx, values):
             cnt+=1
         return
 
-
 def solution_dfs(numbers, target):
 
     global cnt
@@ -50,8 +48,8 @@ def solution_dfs(numbers, target):
 
 if __name__ == "__main__":
     import time
-    numbers = [1,1,1,1,1]
-    target=3
+    numbers = [4, 1, 2, 1]
+    target=4
 
     print("start")
     start = time.time()
