@@ -1,48 +1,50 @@
 ### 문제 : https://school.programmers.co.kr/learn/courses/30/lessons/1844
 
 ###############################
-#           풀이 완료          #
+#           오답 완료          #
 ###############################
 
 from collections import deque
 
+# 최단거리, 최선의 경우를 구할때는 bfs를 주로 사용한다.
 def solution(maps):
-    queue = deque()
-
-    # 상하좌우 이동
-    move_x = [0, 0, -1, 1]
-    move_y = [-1, 1, 0, 0]
+    load_list=deque()
 
     y, x = 0, 0
-    queue.append((y, x))
+    load_list.append((y, x))
+    len_y = len(maps)
+    len_x = len(maps[0])
 
-    while queue:
-        y, x = queue.popleft()
+    while load_list:
+        (y, x) = load_list.popleft()
+        # 적진에 도달하면 멈춘다.
+        if y==len_y-1 and x==len_x-1:
+            return maps[y][x]
+        
+        # 상하좌우 이동
+        # 상 y-1, x / 하 y+1, x / 좌 y, x-1 / 우 y, x+1
+        move=[(-1, 0), (1, 0), (0, -1), (0, 1)]
 
-        for i in range(4):
-            ny = y + move_y[i]
-            nx = x + move_x[i]
-
-            # 범위 초과하면 무시
-            if nx<0 or ny<0 or nx>=len(maps[0]) or ny>=len(maps):
+        for (ym, xm) in move:
+            # 범위를 초과하면 pass
+            if y+ym<0 or y+ym>len_y-1 or x+xm<0 or x+xm>len_x-1:
                 continue
-
-            # 벽이면 무시
-            if maps[ny][nx]==0:
+            # 벽이면 pass
+            elif maps[y+ym][x+xm]==0:
                 continue
+            else:
+                if maps[y+ym][x+xm]==1:
+                    maps[y+ym][x+xm] = maps[y][x]+1
+                    load_list.append((y+ym, x+xm))
 
-            # 처음 지나가는 길이면 거리계산 후 다시 상하좌우 확인
-            if maps[ny][nx]==1:
-                maps[ny][nx] = maps[y][x] + 1
-                queue.append((ny, nx))
+    return -1
 
-    return maps[len(maps)-1][len(maps[0])-1] if maps[len(maps)-1][len(maps[0])-1]!=1 else -1
 
 
 
 if __name__ == "__main__":
     import time
-    maps = [[1,0,1,1,1],[1,0,1,0,1],[1,0,1,1,1],[1,1,1,0,1],[0,0,0,0,1]]
+    maps = [[1,0,1,1,1],[1,0,1,0,1],[1,0,1,1,1],[1,1,1,0,0],[0,0,0,0,1]]
 
     print("start")
     start = time.time()
