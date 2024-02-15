@@ -6,7 +6,7 @@
 
 
 # 재귀함수 (종료조건을 확실하게 할 것!!)
-# dfs 수정필요!!!
+# dfs 수정필요!!! deque로 앞에서부터 빼고 앞에서부터 넣는 방식으로!!
 def dfs(nodes, node_lines1, start_node1, answer1):
     # if len(answer1)==nodes or node_lines1==[]:
     if len(answer1)==nodes:
