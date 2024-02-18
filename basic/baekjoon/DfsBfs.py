@@ -1,84 +1,53 @@
 ### 문제 : https://www.acmicpc.net/problem/1260
 
 ###############################
-#           풀이 중          #
+#           풀이 완료          #
 ###############################
 
 
 # 재귀함수 (종료조건을 확실하게 할 것!!)
 # dfs 수정필요!!! deque로 앞에서부터 빼고 앞에서부터 넣는 방식으로!!
-def dfs(nodes, node_lines1, start_node1, answer1):
-    # if len(answer1)==nodes or node_lines1==[]:
-    if len(answer1)==nodes:
-        return " ".join(list(map(str, answer1)))
+def dfs(start_node, nodes, graph, visited1):
+    visited1[start_node]=True # 해당 노드 방문처리
+    print(start_node, end=" ")
+    for i in range(1, nodes+1):
+        if not visited1[i] and graph[start_node][i]:
+            dfs(i, nodes, graph, visited1)
     
-    else: 
-        if start_node1 not in answer1:
-            answer1.append(start_node1)
 
-        if len(answer1)<nodes:
-            for line in node_lines1:
-                if start_node1 in line:
-                    node_lines1.remove(line)
-                    line.remove(start_node1)
+def bfs(start_node, nodes, graph, visited2):
+    q = deque([start_node])
+    visited2[start_node]=True
+    while q:
+        visit_node=q.popleft()
+        print(visit_node, end=" ")
 
-                    if line[0] not in answer1:
-                        start_node1 = line[0]
-                        answer1.append(start_node1)
-                        print(f"dfs answer1 : {answer1}")
-
-                    dfs(nodes, node_lines1, start_node1, answer1)
-                    return " ".join(list(map(str, answer1)))
-
-
-
-def bfs(node_lines2, start_node2):
-    
-    visit_node = [start_node2]
-    answer2 = [start_node2]
-
-    while visit_node!=[]:
-
-        node = visit_node.pop(0)
-        non_visit = []
-        
-        for line in node_lines2:
-            if node in line:
-                line.remove(node)
-
-                if line[0] not in answer2:
-                    visit_node.append(line[0])
-                    answer2.append(line[0])
-
-            else:
-                non_visit.append(line)
-
-        node_lines2 = non_visit
-    return " ".join(list(map(str, answer2)))
+        for i in range(1, nodes+1):
+            if not visited2[i] and graph[visit_node][i]:
+                q.append(i)
+                visited2[i]=True
 
 
 if __name__ == "__main__":
     import copy
+    from collections import deque
     [nodes, lines, start_node] = list(map(int, input().split()))
 
-    # global node_lines1, node_lines2
-    node_lines1 = []
-    node_lines2 = []
+    graph = [[False] * (nodes+1) for _ in range(nodes+1)]
 
     for _ in range(lines):
-        line = list(map(int, input().split()))
-        node_lines1.append(copy.deepcopy(line))
-        node_lines2.append(copy.deepcopy(line))
+        a, b = map(int, input().split())
+        graph[a][b]=True
+        graph[b][a]=True        
 
-    start_node1 = copy.deepcopy(start_node)
-    node_lines1.sort(key = lambda x:(x[0], x[1]))
-    answer1=list()
-    print(dfs(nodes, node_lines1, start_node1, answer1))
+    visited1=[False] * (nodes+1)  # 방문기록
+    visited1[0]=True
+    dfs(start_node, nodes, graph, visited1)
+    print()
 
-    start_node2 = copy.deepcopy(start_node)
-    node_lines2.sort(key = lambda x:(x[0], x[1]))
-    answer2=list()
-    print(bfs(node_lines2, start_node2))
+    visited2=[False] * (nodes+1)
+    visited2[0]=True
+    bfs(start_node, nodes, graph, visited2)
 
 
 
