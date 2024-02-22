@@ -5,49 +5,53 @@
 ###############################
 
 
-# 재귀함수 (종료조건을 확실하게 할 것!!)
-# dfs 수정필요!!! deque로 앞에서부터 빼고 앞에서부터 넣는 방식으로!!
-def dfs(start_node, nodes, graph, visited1):
-    visited1[start_node]=True # 해당 노드 방문처리
-    print(start_node, end=" ")
-    for i in range(1, nodes+1):
-        if not visited1[i] and graph[start_node][i]:
-            dfs(i, nodes, graph, visited1)
+def dfs(visit, nodes, start):
+    print(start, end=" ")
+
+    if False not in visit.values():
+        return
     
+    for i in range(1, len(nodes)):
+        if visit[i]==False and nodes[start][i]==True:
+            visit[i]=True
+            dfs(visit, nodes, i)
 
-def bfs(start_node, nodes, graph, visited2):
-    q = deque([start_node])
-    visited2[start_node]=True
+def bfs(visit, nodes, start):
+    from collections import deque
+
+    q = deque([start])
+
     while q:
-        visit_node=q.popleft()
-        print(visit_node, end=" ")
+        now = q.popleft()
+        print(now, end=" ")
 
-        for i in range(1, nodes+1):
-            if not visited2[i] and graph[visit_node][i]:
+        for i in range(1, len(nodes)):
+            # 아직 방문을 안했고 방문예정이라면
+            if visit[i]==False and nodes[now][i]==True:
                 q.append(i)
-                visited2[i]=True
+                visit[i]=True
 
 
 if __name__ == "__main__":
-    import copy
-    from collections import deque
-    [nodes, lines, start_node] = list(map(int, input().split()))
+    
+    N, M, V = map(int, input().split(" "))
+    
+    visit_dfs = {x: False for x in range(1, N+1)}
+    visit_bfs = {x: False for x in range(1, N+1)}
+    nodes = [[False for _ in range(N+1)] for __ in range(N+1)]
 
-    graph = [[False] * (nodes+1) for _ in range(nodes+1)]
+    visit_dfs[V] = True
+    visit_bfs[V] = True
 
-    for _ in range(lines):
-        a, b = map(int, input().split())
-        graph[a][b]=True
-        graph[b][a]=True        
+    for _ in range(M):
+        a, b = map(int, input().split(" "))
+        nodes[a][b] = True
+        nodes[b][a] = True
 
-    visited1=[False] * (nodes+1)  # 방문기록
-    visited1[0]=True
-    dfs(start_node, nodes, graph, visited1)
+    dfs(visit_dfs, nodes, V)
     print()
-
-    visited2=[False] * (nodes+1)
-    visited2[0]=True
-    bfs(start_node, nodes, graph, visited2)
+    bfs(visit_bfs, nodes, V)
+    
 
 
 
