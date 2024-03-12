@@ -42,18 +42,31 @@ board	                                    answer
 '''
 # 효율성 통과 X
 def solution(board):
-    answer = 0
-    cnt = 0
-    for i in board:
-        cnt+=i.count(1)
-    cnt = int(cnt**0.5)
+    ans = 0
     
-    while cnt>0:
-        for x in range(len(board)-cnt+1):
-            for y in range(len(board[0])-cnt+1):
-                new = [row[y:y+cnt] for row in board[x:x+cnt]]
-                zero_cnt = [i.count(0) for i in new]
-                if zero_cnt.count(0)==len(zero_cnt):
-                    return len(new)**2
-        cnt-=1
-    return 0
+    if len(board)==1 or len(board[0])==1:
+        # 가로로 한줄
+        if len(board)==1:
+            if 1 in board[0]:
+                ans=1
+
+        # 세로로 한줄
+        else:
+            for i in board:
+                if i[0]==1:
+                    ans=1
+
+    else:
+        for y in range(1, len(board)):
+            for x in range(1, len(board[0])):
+                if board[y][x] and board[y-1][x] and board[y][x-1] and board[y-1][x-1]:
+                    board[y][x]=min(board[y-1][x], board[y][x-1], board[y-1][x-1])+1
+                    ans=max(board[y][x], ans)
+                elif board[y][x]==1:
+                    ans=max(board[y][x], ans)
+
+    return ans*ans
+
+
+board = [[0,1,1,1],[1,1,1,1],[1,1,1,1],[0,0,1,0]]
+print(solution(board))
