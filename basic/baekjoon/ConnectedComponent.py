@@ -1,39 +1,34 @@
 ### 문제 : https://www.acmicpc.net/problem/11724
 
 ###############################
-#           풀이 중          #
+#           풀이 완료          #
 ###############################
 
+## dfs 방법 
 import sys
-sys.setrecursionlimit(10**6)
-input = sys.stdin.readline
+sys.setrecursionlimit(10000)  ## python에서 정해준 깊이 탐색 길이를 벗어나게 되면 오류가 발생하므로 탐색길이 재설정
 
-# dfs 함수
-def dfs(graph, v, visited):
-    visited[v] = True
-    for i in graph[v]:
+group_cnt=0
+N, M = map(int, sys.stdin.readline().split(' '))  ## sys로 입력을 받으면 시간초과 문제 해결됨!!
+line_conn = {x:[] for x in range(N+1)}
+for _ in range(M):
+    a, b = map(int, sys.stdin.readline().split(' '))
+    line_conn[a].append(b)
+    line_conn[b].append(a)
+
+visited = {y: False for y in range(1,N+1)}
+
+def dfs(node, visited, line_conn):
+    visited[node]=True
+    for i in line_conn[node]:
         if not visited[i]:
-            dfs(graph, i, visited)
+            dfs(i, visited, line_conn)
 
-n, m = map(int, input().split()) # 정점의 개수, 간선의 개수
-graph = [[] for _ in range(n+1)]
-for i in range(m):
-    u, v = map(int, input().split())
-    graph[u].append(v)
-    graph[v].append(u)
+for a in range(1, N+1):
+    if not visited[a]:
+        dfs(a, visited, line_conn)
+        group_cnt+=1
 
-count = 0 # 연결 노드의 수
-visited = [False] * (n+1)
-for i in range(1, n+1):
-    if not visited[i]:
-        dfs(graph, i, visited)
-        count += 1 # dfs 한 번 끝날 때마다 count+1
-
-print(count)
-
-
-
-
-
+print(group_cnt)
 
 
