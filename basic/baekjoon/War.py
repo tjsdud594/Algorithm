@@ -1,48 +1,47 @@
 ### 문제 : https://www.acmicpc.net/problem/1303
 
 ###############################
-#           풀이 중          #
+#           풀이 완료          #
 ###############################
 
+import sys
 from collections import deque
+N, M = map(int, sys.stdin.readline().split())
 
-# BFS
-def bfs(x, y, color):
-  cnt = 0  # 병사 수
-  queue = deque()
-  # 시작 지점 삽입, 방문 처리
-  queue.append((x, y))
-  graph[x][y] = 0
+group = []
 
-  while queue:
-    x, y = queue.popleft()
-    cnt += 1
-    for i in range(4):
-      nx = x + dx[i]
-      ny = y + dy[i]
-      if(0 <= nx < m and 0 <= ny < n):
-        # 방문한적이 없으면 삽입, 방문 처리
-        if(graph[nx][ny] == color):
-          queue.append((nx, ny))
-          graph[nx][ny] = 0
-  return cnt
+for _ in range(M):
+    group.append(list(sys.stdin.readline())[:-1])
 
-n, m = map(int, input().split())  # 가로, 세로
-# m * n (W:흰색 옷, B: 파란색 옷)
-graph = [list(input()) for _ in range(m)]
-dx = [-1, 1, 0, 0]
-dy = [0, 0, -1, 1]
-    
-white = 0
-blue = 0
-for i in range(m):
-  for j in range(n):
-    if(graph[i][j] == 'W'):
-      white += (bfs(i, j, 'W'))**2
-    elif(graph[i][j] == 'B'):
-      blue += (bfs(i, j, 'B'))**2
+# 상하좌우 이동
+mv = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+w_score = 0
+b_score = 0
 
-print(white, blue)
+q = deque([])
 
+def bfs(point, q, find_side):
+    cnt=0
+    q.append(point)
+    while q:
+        (y, x) = q.popleft()
+        group[y][x]='X'
 
+        cnt+=1
+        for (mv_y, mv_x) in mv:
+            if (y+mv_y)<0 or (y+mv_y)>=M or (x+mv_x)<0 or (x+mv_x)>=N:
+                continue
+            elif group[y+mv_y][x+mv_x]==find_side:
+                q.append((y+mv_y, x+mv_x))
+                group[y+mv_y][x+mv_x]='X'
+    return cnt*cnt
 
+for y in range(M):
+    for x in range(N):
+        if group[y][x]!='X':
+            if group[y][x]=='W':
+                w_score+=bfs((y, x), q, group[y][x])
+            else:
+                b_score+=bfs((y, x), q, group[y][x])
+
+print(w_score, b_score)
