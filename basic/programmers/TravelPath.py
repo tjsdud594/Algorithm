@@ -7,27 +7,24 @@
 
 def solution(tickets):
     from collections import defaultdict
-    t_dict = defaultdict(list)
-    
-    # key: 출발지, value: 목적지인 딕셔너리 만듦
-    for s, e in tickets:
-        t_dict[s].append(e)
-    
-    # 목적지 기준 내림차순 정렬(맨 오른쪽걸 pop해서 쓸거임. 알파벳 순서 상 가장 앞선 것)
-    for t_key in t_dict.keys():
-        t_dict[t_key].sort(reverse = True)
-    
     answer = []
-    path = ["ICN"]
+    airport_dict = defaultdict(list)
+    for airport in tickets:
+        airport_dict[airport[0]].append(airport[1])
+
+    # 각 공항 방문순서대로 정렬
+    for airport in airport_dict.keys():
+        airport_dict[airport]=sorted(airport_dict[airport])
     
-    while path:
-        now = path[-1]
+    # print(airport_dict)
+
+    def dfs(now):
+        while airport_dict[now]:
+            dfs(airport_dict[now].pop(0))
+        answer.append(now)
         
-        if now not in t_dict or len(t_dict[now]) == 0:
-            answer.append(path.pop())
-        else:
-            path.append(t_dict[now].pop())
-    
+    dfs('ICN')
+
     return answer[::-1]
 
 
