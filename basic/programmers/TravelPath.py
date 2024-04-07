@@ -9,22 +9,19 @@ def solution(tickets):
     from collections import defaultdict
     answer = []
     airport_dict = defaultdict(list)
-    for airport in tickets:
-        airport_dict[airport[0]].append(airport[1])
+    for start, end in tickets:
+        airport_dict[start].append(end)
 
-    # 각 공항 방문순서대로 정렬
-    for airport in airport_dict.keys():
-        airport_dict[airport]=sorted(airport_dict[airport])
-    
-    # print(airport_dict)
+    for airport in airport_dict:
+        airport_dict[airport] = sorted(airport_dict[airport])
 
+    # 가장 마지막에 가는 공항부터 append
     def dfs(now):
         while airport_dict[now]:
             dfs(airport_dict[now].pop(0))
         answer.append(now)
-        
-    dfs('ICN')
 
+    dfs("ICN")
     return answer[::-1]
 
 
