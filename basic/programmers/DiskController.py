@@ -1,4 +1,4 @@
-### 문제 : https://school.programmers.co.kr/learn/courses/30/lessons/42628
+### 문제 : https://school.programmers.co.kr/learn/courses/30/lessons/42627
 
 ###############################
 #           풀이완료           #
