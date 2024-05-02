@@ -5,33 +5,38 @@
 ###############################
 
 
-import heapq
 
 def solution(jobs):
+    import heapq
+    import math
+
     answer = 0
-    now = 0 #현재시간
-    i = 0   #처리개수
-    start = -1 #마지막 완료시간
-    heap = []  # 
-    
+    now = 0
+    start = -1
+    heap = []
+    i = 0
+
     while i < len(jobs):
         for job in jobs:
-            # 요청시간이 이전 잡 완료시간과 현재 사이일때
+            # 이전 job 종료시간과 현재 시간 사이에 요청된 job일 경우 대기열에 넣기
             if start < job[0] <= now:
-                heapq.heappush(heap,[job[1],job[0]])  # 작업시간 기준으로 우선순위 부여하여 heap 생성, 작업이 짧을 수록 우선순위 상향, (작업시간, 요청시간)
-                print(heap)
-        
+                heapq.heappush(heap, [job[1], job[0]])
+                # print(heap)
+
         if heap:
-            current = heapq.heappop(heap)
-            print(f"current : {current}")
+            i+=1
+            spent_time, start_time = heapq.heappop(heap)
             start = now
-            now += current[0]
-            answer += now - current[1] #요청으로부터 처리시간
-            i += 1
+            # 각 job의 종료시간을 더하여 이전 job의 종료시간 체크
+            now += spent_time
+            # 해당 job의 대기+실행시간 누적
+            answer+=(now-start_time)
         else:
-            now += 1
-            
-    return answer // len(jobs)
+            now+=1
+
+        # print(f"start : {start}, now : {now}")
+
+    return math.trunc(answer/len(jobs))
 
 
 if __name__ == "__main__":
