@@ -1,7 +1,7 @@
 ### 문제 : https://school.programmers.co.kr/learn/courses/30/lessons/12985
 
 ###############################
-#           풀이 중          #
+#           풀이 완료          #
 ###############################
 
 def solution(n,a,b):
