@@ -4,28 +4,31 @@
 #           풀이 완료          #
 ###############################
 
-import heapq
-
 n=int(input())
-# answer = []
 heap = [0, 1]
 
-def swap(arr, x, y): #두 위치를 바꾸는 코드
-    temp = arr[x]
-    arr[x] = arr[y]
-    arr[y] = temp
- 
+## list 내부에서 자리 바꾸는 함수 
+def swap(heap, a,b):
+    temp = heap[a]
+    heap[a] = heap[b]
+    heap[b] = temp
+    return heap
+
 for i in range(2, n+1):
-    heap.append(i) #맨 뒤에 최댓값 추가
-    swap(heap, i, i-1) #1과 바꿔줌
-    j = i-1 #j위치에 있는 최댓값
-    while j != 1: #j위치에 있는 최댓값은 최상단에 위치할 때 까지 부모 노드와 지속적으로 바꾸어줌
-        swap(heap, j, j//2) #교환
-        j = j//2 #부모 노드의 위치
+    # 순서대로 숫자를 append해서 추가
+    print(f"append : {i}")
+    heap.append(i)
+    heap=swap(heap, i, i-1)
+    print(heap)
+    j = i-1 ## 현재 추가된 최대 값 위치 
+    # append된 숫자를 부모노드와 값을 바꾸어가며 swap
+    while j!=1:
+        heap = swap(heap, j, j//2)
         print(heap)
+        j = j//2
 
 for i in heap[1:]:
-    print(i, end = ' ')
+    print(i, end=" ")
 
 
 
