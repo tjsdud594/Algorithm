@@ -17,17 +17,17 @@ def solution(n,a,b):
     right=n
     
     while 1:
-        print(f"{left}~{right}   // {non_fight}")
+        # print(f"{left}~{right}   // {non_fight}")
         if left==small_num and right==big_num:
             break
-        elif (right//2)>=big_num:
-            print("왼쪽무리를 골라요")
+        elif big_num<((left+right-1)//2)+1:
+            # print("왼쪽무리를 골라요")
             left=left
-            right=right//2
+            right=(left+right-1)//2
             non_fight+=1
-        elif (right//2)+1<=small_num:
-            print("오른쪽무리를 골라요")
-            left=(right//2)+1
+        elif ((left+right-1)//2)<small_num:
+            # print("오른쪽무리를 골라요")
+            left=((left+right-1)//2)+1
             right=right
             non_fight+=1
         else:
@@ -39,9 +39,9 @@ def solution(n,a,b):
 if __name__ == "__main__":
     import time
 
-    N=8
-    A=4
-    B=7
+    N=2**20
+    A=2**19+1
+    B=2**19+2
 
     start = time.time()
     print(solution(N, A, B))
