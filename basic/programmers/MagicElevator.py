@@ -6,30 +6,31 @@
 
 def solution(storey):
     answer = 0
-    ## 큰수에서 중간값 이상일때는 빼는게 이득
-    while storey:
-        remain = storey%10
-        # 6,7,8,9
-        if remain>5:
-            answer += (10-remain)
-            storey += 10
-        #0,1,2,3,4
-        elif remain<5:
-            answer += remain
-        # 5
-        else:
-            if (storey // 10) % 10 > 4:
-                storey += 10
-            answer += remain
-        storey //= 10
 
+    while storey:
+        # 1의 자리수로 버튼 판단
+        floor = storey%10
+        ## 0~4 일경우 아래서부터 올라감
+        if floor<5:
+            answer+=floor
+        ## 6~9 일경우 위에서부터 내려옴, 한자리 윗 수(10의 자리)에 +1
+        elif floor>5:
+            answer+=(10-floor)
+            storey+=10
+        ## 5일경우 해당 윗자리수를 보고 판단
+        else:
+            if (storey//10)%10 > 4:
+                storey+=10
+            answer+=floor
+        storey//=10
+        print(f"floor : {floor}, storey : {storey}, answer : {answer}")
     return answer
 
 
 if __name__ == "__main__":
     import time
 
-    storey=88
+    storey=555
 
     start = time.time()
     print(solution(storey))
