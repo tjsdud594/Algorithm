@@ -1,7 +1,7 @@
 ### 문제 : https://school.programmers.co.kr/learn/courses/30/lessons/138476
 
 ###############################
-#           풀이중           #
+#           풀이완료           #
 ###############################
 
 def solution(k, tangerine):
