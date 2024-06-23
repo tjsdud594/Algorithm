@@ -4,60 +4,62 @@
 #           풀이중           #
 ###############################
 
-import collections 
+from collections import deque
 
-def bfs(start_x, start_y, target_x, target_y, MAP):
-    move = {(-1,0),(0,1),(1,0),(0,-1)}
+def bfs(map, x, y, goal):
     
-    q = collections.deque()
-    q.append((start_x, start_y, 0)) # cnt : 0
-    
-    visited = [[0 for _ in range(len(MAP[0]))] for _ in range(len(MAP))]
-    visited[start_x][start_y] = 1
-    
+    move = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    visited = [[0 for _ in range(len(map[0]))] for __ in range(len(map))]
+
+    q = deque([])
+    q.append((y,x))
+
     while q:
-        x, y, cnt = q.popleft()
-        if x == target_x and y == target_y:
-            return cnt
-        
-        for tx, ty in move:
-            nx = tx + x
-            ny = ty + y
-            
-            if 0<=nx<len(MAP) and 0<=ny<len(MAP[0]) and MAP[nx][ny] != 'X' and visited[nx][ny] != 1:
-                visited[nx][ny] = 1
-                q.append((nx,ny,cnt+1))
-                
+        y, x = q.popleft()
+
+        if map[y][x] == goal:
+            for a in visited:
+                print(a)
+            return visited[y][x]
+
+        for (move_y, move_x) in move:
+
+            if 0<=y+move_y<len(map) and 0<=x+move_x<len(map[0]) and map[y+move_y][x+move_x]!="X" and visited[y+move_y][x+move_x]==0:
+                visited[y+move_y][x+move_x]=visited[y][x]+1
+                q.append((y+move_y, x+move_x))
     return -1
-    
+
 
 def solution(maps):
-    total = 0
-    
-    for i in range(len(maps)):
-        for j in range(len(maps[i])):
-            if maps[i][j] == 'S':
-                sx, sy = i,j
-            if maps[i][j] == 'L':
-                lx, ly = i,j
-            if maps[i][j] == 'E':
-                ex, ey = i,j
-            
 
-    # 레버찾고
-    before = bfs(sx, sy, lx, ly, maps)
-    # 출구 찾기
-    after = bfs(lx, ly, ex, ey, maps)
-    
-    if before == -1 or after == -1: 
+    for i in range(len(maps)):
+        for j in range(len(maps[0])):
+            if maps[i][j] == "S":
+                sy, sx = i, j
+
+            elif maps[i][j] == "L":
+                ly, lx = i, j
+
+    ## 레버찾기
+    find_lever = bfs(maps, sx, sy, "L")
+    print(find_lever)
+
+    ## 출구찾기
+    find_exit = bfs(maps, lx, ly, "E")
+    print(find_exit)
+
+    if find_lever==-1 or find_exit==-1:
         return -1
-    
-    return after + before
+
+    return find_lever + find_exit
+
+
+
 
 if __name__ == "__main__":
     import time
 
-    maps = ["SOOOL","XXXXO","OOOOO","OXXXX","OOOOE"]
+    maps = ["XXXXL", "XOOSX", "XXXXX", "XXXOO", "EXXXX", "XXXXX"]
 
     start = time.time()
     print(solution(maps))
