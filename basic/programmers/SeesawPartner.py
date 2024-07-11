@@ -8,18 +8,19 @@ from collections import Counter
 
 def solution(weights):
     answer = 0
-    new_weights = list(set(weights))
     w_cnt = Counter(weights)
 
-    ## 1:1
-    for w in w_cnt.keys():
-        if w_cnt[w]>1:
-            answer+=(w_cnt[w]*(w_cnt[w]-1))//2
+    ## 같은 무게인 사람 체크
+    for k in w_cnt.keys():
+        if w_cnt[k]>1:
+            answer += (w_cnt[k]*(w_cnt[k]-1))//2
 
-    check = (3/4, 1/2, 2/3)
-    for w in new_weights:
-        for c in check:
-            answer+=w_cnt[w]*w_cnt[w*c]
+    ## 각 짝꿍 찾기
+    ratio_list = [(2,3), (1,2), (3,4)]
+    for w in w_cnt.keys():
+        for u,d in ratio_list:
+            if w_cnt[(w*u)/d]:
+                answer+=(w_cnt[int((w*u)/d)])*w_cnt[w]
 
     return answer
 
