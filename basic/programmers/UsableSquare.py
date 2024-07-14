@@ -7,6 +7,8 @@
 def solution(w, h):
     import math
 
+    ## 각 사각형의 개수를 계산해보면 사용하지 못하는 사각형의 개수는 일정하게 증가한다
+    ## 사용하지 못하는 사각형의 개수 : 가로 + 세로 - 최대공약수
     return (w*h) - (w + h - (math.gcd(w, h)))
 
 
