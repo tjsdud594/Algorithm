@@ -6,45 +6,42 @@
 
 
 def solution(n):
-    answer = []
-    cnt = 1
-    tri = []
 
-    ## 삼각형 형태 리스트 생성
-    while cnt <= n:
-        tri.append([0 for _ in range(0, cnt)])
-        cnt+=1
-
-    x, y = 0, 0
     num = 1
-    end_num = (n*(n+1))//2
-    direction = [(1, 0), (0, 1), (-1, -1)]
+    max_num = (n*(n+1))//2
     turn = 0
+    turn_list = [(1, 0), (0, 1), (-1, -1)]  # 아래, 오른쪽, 위
+    x, y = 0, 0
+    triangle = []
 
-    while num<=end_num:
-        
-        tri[y][x] = num
+    ## 토대 리스트 생성
+    for i in range(1, n+1):
+        triangle.append([0 for _ in range(i)])
+
+    while num<=max_num:
+        triangle[y][x] = num
         num+=1
-        
-        dy, dx = direction[turn]
-        ny = y+dy
-        nx = x+dx
+        my, mx = turn_list[turn]
+        ny = y+my
+        nx = x+mx
 
-        if 0<=ny<n and 0<=nx<n and tri[ny][nx] ==0:
-            y, x = ny, nx
+        if 0<=ny<n and 0<=nx<n and triangle[ny][nx]==0:
+            y = ny
+            x = nx
+            
         else:
             turn = (turn + 1) % 3
-            dy, dx = direction[turn]
-            y+=dy
-            x+=dx
+            my, mx = turn_list[turn]
+            y+=my
+            x+=mx
 
-    return [x for y in tri for x in y]
+    return [b for a in triangle for b in a]
 
 
 if __name__ == "__main__":
     import time
 
-    n = 5
+    n = 6
 
     start = time.time()
     print(solution(n))
