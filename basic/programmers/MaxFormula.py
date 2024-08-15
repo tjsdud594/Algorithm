@@ -6,46 +6,53 @@
 
 from itertools import permutations
 
-def calc(num1, num2, operator):
-    if operator == "*":
-        return str(int(num1) * int(num2))
-    elif operator == "+":
-        return str(int(num1) + int(num2))
-    elif operator == "-":
-        return str(int(num1) - int(num2))
-
-def logic(exp, op):
-    array = []
+def cal(op, a, b):
+    a = int(a)
+    b = int(b)
+    if op=="-":
+        return str(a-b)
+    elif op=="+":
+        return str(a+b)
+    else:
+        return str(a*b)
+    
+def oper(expression, op_list):
+    cal_list = []
     tmp = ""
 
-    for i in exp:
-        if i.isdigit()==True:
-            tmp+=i
-        else:
-            array.append(tmp)
-            array.append(i)
-            tmp=""
-    array.append(tmp)
+    ## 숫자와 연산자 구분하여 list 생성 -> cal_list = ['100', '-', '200', '*', '300', '-', '500', '+', '20']
+    for num in expression:
 
-    for o in op:
+        if num.isdigit()==True:
+            tmp+=num
+        else:
+            cal_list.append(tmp)
+            cal_list.append(num)
+            tmp=""
+    cal_list.append(tmp)
+
+    ## stack구조를 활용해서 순서대로 계산 
+    for op in op_list:
         stack = []
-        while len(array)!=0:
-            tmp = array.pop(0)
-            if tmp==o:
-                stack.append(calc(stack.pop(), array.pop(0), o))
+        while len(cal_list)!=0:
+            tmp = cal_list.pop(0)
+
+            ## 연산자 차례일경우 계산
+            if tmp==op:
+                stack.append(cal(op, stack.pop(), cal_list.pop(0)))
             else:
                 stack.append(tmp)
-        array=stack
-
-    return abs(int(array[0]))
+        cal_list=stack
+    return abs(int(cal_list[0]))
 
 def solution(expression):
-    oper = permutations(["+", "-", "*"], 3)
-    result = []
-    for op in oper:
-        result.append(logic(expression, op))
+    answer = []
+    op_permu = list(permutations(("+","-","*"), 3))
 
-    return max(result)
+    for op_list in op_permu:
+        answer.append(oper(expression, op_list))
+    
+    return max(answer)
 
 if __name__ == "__main__":
     import time
