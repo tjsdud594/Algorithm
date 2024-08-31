@@ -7,21 +7,20 @@
 from heapq import *
 
 def solution(numbers):
-    n = len(numbers)
-    answer = [-1] * n
+    answer = [-1] * len(numbers)
+    heap = []
 
-    h = []
-
-    for i in range(n):
+    for i in range(len(numbers)):
         value = numbers[i]
 
-        while h and h[0][0] < value:
-            _, idx = heappop(h)
+        ## heap의 최솟값이 value보다 작으면 answer에 기재 
+        while heap and heap[0][0] < value:
+            _, idx = heappop(heap)
             answer[idx] = value
 
-        heappush(h, [value, i])
-    return answer
+        heappush(heap, [value, i])
 
+    return answer
 
 
 
